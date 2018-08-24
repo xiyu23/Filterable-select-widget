@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="jquery-1.10.2.min.js"></script>
+    <script src="FilterableSelect/filterableSelect.js"></script>
+    <link rel="stylesheet" href="FilterableSelect/css.css">
+
+    <style type="text/css">
+        #my-select{
+            width: 300px;
+            height: 40px;
+            font-size: 22PX;
+        }
+
+        #result{
+            color:red;
+            font-family: "Segoe UI";
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Filterable <code>select</code> demo</h1>
+    <select id="my-select"></select>
+    <label>You have choosen: <span id="result"></span></label>
+    <script type="text/javascript">
+        $(function(){
+            //step1: init select with some options
+            var options = ["coffee", "milk", "taco", "IN-N-OUT Burger", "McDonald", "vanilla", "Coca-Cola", "pizza", "spaghetti"];
+            options.forEach(function (option, index) {
+                var $option = $('<option>' + option + '</option>');
+                $('#my-select').append($option);
+            });
+
+            //step2: add feature
+            $('#my-select').MakeSelectFilterable(OnSelectChange);
+
+
+        });
+
+        function OnSelectChange(selectElem) {
+            var option = $(selectElem).children('option:selected').text();
+            $('#result').text(option);
+        }
+    </script>
+</body>
+</html>
